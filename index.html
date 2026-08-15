@@ -3,319 +3,996 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Church Thank You Screen</title>
+
+<title>Women's Month | Thank You Screen</title>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
 }
 
+
+/* =========================
+   WOMEN'S MONTH BACKGROUND
+========================= */
 body{
     font-family:Arial, Helvetica, sans-serif;
     position:relative;
     color:#fff;
-    background:linear-gradient(-45deg,#000000,#0a1628,#0d1b2a,#1b263b,#2a3b55,#b8860b,#1b263b,#000000);
-    background-size:400% 400%;
+
+    background:linear-gradient(
+        -45deg,
+        #310b3f,
+        #4a124f,
+        #70205f,
+        #9c2f68,
+        #d4518c,
+        #f48fb1,
+        #c878a0,
+        #74315f,
+        #310b3f
+    );
+
+    background-size:500% 500%;
     animation:gradientShift 25s ease infinite;
 }
 
 @keyframes gradientShift{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
 }
+
+
+/* =========================
+   SOFT BACKGROUND LIGHT
+========================= */
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(255,182,193,.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,215,230,.08),
+            transparent 50%
+        );
+
+    pointer-events:none;
+    z-index:0;
+}
+
 
 /* =========================
    BACKGROUND SCROLLING BAND
-   (seamless, appears instantly)
 ========================= */
 .bg-scroll{
     position:absolute;
     top:50%;
     left:0;
+
     transform:translateY(-50%);
+
     width:100%;
     overflow:hidden;
+
     z-index:1;
+
     pointer-events:none;
 }
 
 .bg-scroll-track{
     display:flex;
     width:max-content;
+
     animation:bgScroll 220s linear infinite;
 }
 
 .bg-scroll-track span{
-    font-size:22vw;
+    font-size:28vw;
     font-weight:900;
+
     color:transparent;
-    -webkit-text-stroke:2px rgba(218,165,32,0.15);
-    text-stroke:2px rgba(218,165,32,0.15);
+
+    -webkit-text-stroke:
+        2px white;
+
+    text-stroke:
+        2px rgba(255,182,193,0.18);
+
     white-space:nowrap;
+
     padding-right:6vw;
+
     line-height:1;
+
     text-transform:uppercase;
 }
 
 @keyframes bgScroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
 }
+
 
 /* =========================
    HEADER
 ========================= */
 .header{
     position:absolute;
+
     top:2vh;
     left:2vw;
+
     display:flex;
     align-items:center;
+
     gap:1.2vw;
-    z-index:20;
-    max-width:70vw;
+
+    z-index:30;
+
+    max-width:75vw;
 }
 
-.logo{
-    width:150px;
-    height:115px;
-    object-fit:fill;
-}
-
-.church-name{
-    font-size:3.5vw;
-    font-weight:1000;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    line-height:1.2;
-
-    /* Blue text */
-    color:navy;
-
-    /* Gold outline around each letter */
-    -webkit-text-stroke:2px #FFD700;
-    text-stroke:2px #FFD700;
-
-    /* Optional glow */
-    text-shadow:
-        0 0 10px rgba(255,215,0,0.6),
-        0 0 20px rgba(255,215,0,0.4),
-        2px 2px 5px rgba(0,0,0,0.5);
-}
 
 /* =========================
-   OUTLINE + MAIN THANK YOU
+   ANIMATED LOGO FLOWER FRAME
 ========================= */
-.center-wrap{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    z-index:10;
-    text-align:center;
-    width:100%;
+.logo-frame{
+    position:relative;
+
+    width:175px;
+    height:140px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
 }
 
-.bg-outline{
-    font-size:17vw;
-    font-weight:900;
-    color:transparent;
-    -webkit-text-stroke:2px rgba(70,130,180,0.18);
-    text-transform:uppercase;
-    line-height:1;
+
+/* Glow behind logo */
+.logo-frame::before{
+    content:"";
+
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    white-space:nowrap;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.9),
+            rgba(255,182,193,.5),
+            rgba(255,105,180,.18),
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 20px rgba(255,182,193,.8),
+        0 0 45px rgba(255,105,180,.55),
+        0 0 70px rgba(186,85,211,.25);
+
+    animation:logoGlow 4s ease-in-out infinite;
+
     z-index:1;
 }
 
-.main-text{
+
+.logo{
+    width:145px;
+    height:110px;
+
+    object-fit:contain;
+
     position:relative;
-    font-size:14vw;
-    font-weight:900;
-    text-transform:uppercase;
-    line-height:1;
+
     z-index:10;
-    background:linear-gradient(90deg,#000000,#0a1628,#1e3a5f,#4682b4,#daa520,#ffd700,#daa520,#1e3a5f,#000000);
-    background-size:300% 100%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:pulse 4s ease-in-out infinite, hue 12s linear infinite;
-    filter:drop-shadow(0 0 25px rgba(218,165,32,0.45));
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,255,255,.8))
+        drop-shadow(0 0 18px rgba(255,105,180,.6));
+
+    animation:logoFloat 5s ease-in-out infinite;
 }
 
-@keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.04);}
+
+@keyframes logoFloat{
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-6px);
+    }
 }
 
-@keyframes hue{
-    from{background-position:0% 50%;}
-    to{background-position:300% 50%;}
+
+@keyframes logoGlow{
+    0%,
+    100%{
+        transform:scale(1);
+        opacity:.7;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:1;
+    }
 }
+
 
 /* =========================
-   MARQUEES (top + bottom)
+   FLOWERS AROUND LOGO
+========================= */
+.logo-flower{
+    position:absolute;
+
+    z-index:20;
+
+    font-size:36px;
+
+    filter:
+        drop-shadow(0 0 5px rgba(255,255,255,.9))
+        drop-shadow(0 0 12px rgba(255,105,180,.7));
+
+    animation:
+        flowerFloat 4s ease-in-out infinite,
+        flowerRotate 10s linear infinite;
+}
+
+
+.flower1{
+    top:-8px;
+    left:8px;
+}
+
+
+.flower2{
+    top:-10px;
+    right:5px;
+
+    animation-delay:-2s;
+}
+
+
+.flower3{
+    bottom:-5px;
+    left:5px;
+
+    animation-delay:-4s;
+}
+
+
+.flower4{
+    bottom:-6px;
+    right:4px;
+
+    animation-delay:-1s;
+}
+
+
+.flower5{
+    left:-13px;
+    top:43%;
+
+    font-size:31px;
+
+    animation-delay:-3s;
+}
+
+
+.flower6{
+    right:-13px;
+    top:43%;
+
+    font-size:31px;
+
+    animation-delay:-5s;
+}
+
+
+@keyframes flowerFloat{
+    0%,
+    100%{
+        transform:translateY(0) scale(1);
+    }
+
+    50%{
+        transform:translateY(-10px) scale(1.12);
+    }
+}
+
+
+@keyframes flowerRotate{
+    from{
+        rotate:0deg;
+    }
+
+    to{
+        rotate:360deg;
+    }
+}
+
+
+/* =========================
+   FLOATING PETALS
+========================= */
+.petal{
+    position:absolute;
+
+    width:10px;
+    height:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #ffc0cb,
+            #ff69b4
+        );
+
+    border-radius:
+        80% 20%
+        80% 20%;
+
+    z-index:15;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.8);
+
+    animation:petalMove 6s ease-in-out infinite;
+}
+
+
+.petal1{
+    top:8px;
+    left:45px;
+}
+
+
+.petal2{
+    top:10px;
+    right:40px;
+
+    animation-delay:-2s;
+}
+
+
+.petal3{
+    bottom:8px;
+    left:42px;
+
+    animation-delay:-4s;
+}
+
+
+.petal4{
+    bottom:8px;
+    right:40px;
+
+    animation-delay:-1s;
+}
+
+
+@keyframes petalMove{
+    0%,
+    100%{
+        transform:
+            translate(0,0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translate(12px,-12px)
+            rotate(180deg);
+    }
+}
+
+
+/* =========================
+   CHURCH NAME
+========================= */
+.church-name{
+    font-size:3.5vw;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    line-height:1.2;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #ffd1dc,
+            #ffb6c1,
+            #ffd700,
+            #fff0f5,
+            #ffffff
+        );
+
+    background-size:300% 100%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:churchShine 10s linear infinite;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255,105,180,.6));
+}
+
+
+@keyframes churchShine{
+    from{
+        background-position:0% 50%;
+    }
+
+    to{
+        background-position:300% 50%;
+    }
+}
+
+
+@keyframes labelFloat{
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+}
+
+
+/* =========================
+   CENTER THANK YOU
+========================= */
+.center-wrap{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:10;
+
+    text-align:center;
+
+    width:100%;
+}
+
+
+.main-text{
+    position:relative;
+
+    font-size:14vw;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    line-height:1;
+
+    z-index:10;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #ffd1dc,
+            #ff69b4,
+            #f8bbd0,
+            #ffd700,
+            #fff0f5,
+            #ff69b4,
+            #ffffff
+        );
+
+    background-size:400% 100%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:
+        pulse 4s ease-in-out infinite,
+        hue 12s linear infinite;
+
+    filter:
+        drop-shadow(0 0 25px rgba(255,105,180,.65));
+}
+
+
+@keyframes pulse{
+    0%,
+    100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+
+@keyframes hue{
+    from{
+        background-position:0% 50%;
+    }
+
+    to{
+        background-position:400% 50%;
+    }
+}
+
+
+/* =========================
+   MARQUEES
 ========================= */
 .marquee{
     position:absolute;
+
     width:100%;
+
     overflow:hidden;
-    z-index:5;
+
+    z-index:8;
 }
 
-.marquee.top{top:16vh;}
-.marquee.bottom{bottom:12vh;}
+
+.marquee.top{
+    top:23vh;
+}
+
+
+.marquee.bottom{
+    bottom:12vh;
+}
+
 
 .track{
     display:flex;
+
     width:max-content;
+
     animation:scroll 90s linear infinite;
 }
 
+
 .track span{
     margin-right:8vw;
-    font-size:1.8vw;
-    color:rgba(173,216,230,0.7);
+
+    font-size:2.5vw;
+
+    color:rgba(255,225,235,.85);
+
     text-transform:uppercase;
+
     font-weight:700;
+
     letter-spacing:3px;
+
     white-space:nowrap;
+
+    text-shadow:
+        0 0 10px rgba(255,105,180,.5);
 }
 
+
 @keyframes scroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
 }
+
+
+/* =========================
+   FLOATING WOMEN'S FLOWERS
+========================= */
+.floating-flower{
+    position:absolute;
+
+    z-index:4;
+
+    font-size:3vw;
+
+    opacity:.65;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,255,255,.5));
+
+    animation:
+        bigFlowerFloat 11s ease-in-out infinite,
+        bigFlowerRotate 18s linear infinite;
+}
+
+
+.ff1{
+    top:30%;
+    left:7%;
+}
+
+
+.ff2{
+    bottom:18%;
+    right:7%;
+
+    animation-delay:-3s;
+}
+
+
+.ff3{
+    top:35%;
+    right:8%;
+
+    font-size:4vw;
+
+    animation-delay:-6s;
+}
+
+
+.ff4{
+    bottom:18%;
+    left:12%;
+
+    animation-delay:-2s;
+}
+
+
+@keyframes bigFlowerFloat{
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-30px);
+    }
+}
+
+
+@keyframes bigFlowerRotate{
+    from{
+        rotate:0deg;
+    }
+
+    to{
+        rotate:360deg;
+    }
+}
+
 
 /* =========================
    FLOATING SHAPES
 ========================= */
 .shape{
     position:absolute;
+
     border-radius:50%;
+
     filter:blur(6px);
+
     opacity:.55;
+
     z-index:2;
+
     mix-blend-mode:screen;
 }
 
+
 .s1{
-    width:14vw;height:14vw;
-    background:radial-gradient(circle,#4682b4,transparent 70%);
-    top:18%;left:15%;
+    width:14vw;
+    height:14vw;
+
+    background:
+        radial-gradient(
+            circle,
+            #ff69b4,
+            transparent 70%
+        );
+
+    top:18%;
+    left:15%;
+
     animation:float1 14s ease-in-out infinite;
 }
 
+
 .s2{
-    width:20vw;height:20vw;
-    background:radial-gradient(circle,#daa520,transparent 70%);
-    bottom:15%;right:12%;
+    width:20vw;
+    height:20vw;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd1dc,
+            transparent 70%
+        );
+
+    bottom:15%;
+    right:12%;
+
     animation:float2 18s ease-in-out infinite;
 }
 
+
 .s3{
-    width:11vw;height:11vw;
-    background:radial-gradient(circle,#1e3a5f,transparent 70%);
-    top:28%;right:22%;
+    width:11vw;
+    height:11vw;
+
+    background:
+        radial-gradient(
+            circle,
+            #ba68c8,
+            transparent 70%
+        );
+
+    top:28%;
+    right:22%;
+
     animation:float3 12s ease-in-out infinite;
 }
 
+
 .s4{
-    width:16vw;height:16vw;
-    background:radial-gradient(circle,#ffd700,transparent 70%);
-    bottom:22%;left:10%;
+    width:16vw;
+    height:16vw;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd700,
+            transparent 70%
+        );
+
+    bottom:22%;
+    left:10%;
+
     animation:float2 20s ease-in-out infinite reverse;
 }
 
+
 @keyframes float1{
-    0%,100%{transform:translateY(0) rotate(0deg);}
-    50%{transform:translateY(-4vh) rotate(180deg);}
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-4vh) rotate(180deg);
+    }
 }
+
+
 @keyframes float2{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(5vh);}
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(5vh);
+    }
 }
+
+
 @keyframes float3{
-    0%,100%{transform:translateX(0);}
-    50%{transform:translateX(-5vw);}
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    50%{
+        transform:translateX(-5vw);
+    }
 }
+
 
 /* =========================
    FOOTER
 ========================= */
 .footer{
     position:absolute;
+
     bottom:3vh;
+
     width:100%;
+
     text-align:center;
-    font-size:1.8vw;
+
+    font-size:2.5vw;
+
     font-weight:600;
+
     letter-spacing:2px;
-    color:linear-gradient(-45deg,#000000,#0a1628,#0d1b2a,#1b263b,#2a3b55,#b8860b,#1b263b,#000000);
+
+    color:#fff0f5;
+
     z-index:20;
-    text-shadow:0 0 15px rgba(218,165,32,0.4);
+
+    text-shadow:
+        0 0 15px rgba(255,105,180,.8);
 }
 
-/* glow */
+
+/* =========================
+   CENTRE GLOW
+========================= */
 .glow{
     position:absolute;
+
     width:60vw;
     height:60vw;
+
     max-width:900px;
     max-height:900px;
-    background:radial-gradient(circle,
-        rgba(30,58,95,.45),
-        rgba(70,130,180,.25),
-        rgba(218,165,32,.15),
-        transparent 70%);
-    left:50%;top:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,105,180,.35),
+            rgba(255,182,193,.25),
+            rgba(186,85,211,.15),
+            rgba(255,215,0,.10),
+            transparent 70%
+        );
+
+    left:50%;
+    top:50%;
+
     transform:translate(-50%,-50%);
+
     z-index:0;
+
     animation:glowPulse 8s ease-in-out infinite;
 }
 
+
 @keyframes glowPulse{
-    0%,100%{opacity:.7; transform:translate(-50%,-50%) scale(1);}
-    50%{opacity:1; transform:translate(-50%,-50%) scale(1.15);}
+    0%,100%{
+        opacity:.7;
+        transform:translate(-50%,-50%) scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.15);
+    }
 }
+
 </style>
 </head>
+
+
 <body>
 
+
+<!-- CENTRE GLOW -->
 <div class="glow"></div>
 
-<!-- Seamless background scrolling THANK YOU (visible immediately) -->
+
+<!-- BACKGROUND SCROLLING THANK YOU -->
 <div class="bg-scroll">
     <div class="bg-scroll-track">
-        <span>THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;</span>
-        <span>THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;THANK YOU&nbsp;&nbsp;</span>
+
+        <span>
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU
+        </span>
+
+        <span>
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU&nbsp;&nbsp;
+            THANK YOU
+        </span>
+
     </div>
 </div>
 
-<!-- Header -->
+
+<!-- HEADER -->
 <div class="header">
-    <img src="pcglogo.png" class="logo" alt="Church Logo" onerror="this.style.display='none'">
+
+    <!-- LOGO WITH FLOWERS -->
+    <div class="logo-frame">
+
+        <img
+            src="pcglogo.png"
+            class="logo"
+            alt="Church Logo"
+            onerror="this.style.display='none'"
+        >
+
+        <!-- FLOWERS -->
+        <span class="logo-flower flower1">🌸</span>
+        <span class="logo-flower flower2">🌺</span>
+        <span class="logo-flower flower3">🌷</span>
+        <span class="logo-flower flower4">🌹</span>
+        <span class="logo-flower flower5">🌼</span>
+        <span class="logo-flower flower6">🌸</span>
+
+        <!-- PETALS -->
+        <span class="petal petal1"></span>
+        <span class="petal petal2"></span>
+        <span class="petal petal3"></span>
+        <span class="petal petal4"></span>
+
+    </div>
+
+
+    <!-- CHURCH NAME -->
     <div class="church-name">
         THE PENTECOSTAL CHURCH OF GOD
     </div>
+
 </div>
 
-<!-- Moving Text Top -->
+
+<!-- TOP MARQUEE -->
 <div class="marquee top">
     <div class="track">
+
         <span>THANK YOU FOR WORSHIPPING WITH US</span>
         <span>GOD BLESS YOU</span>
         <span>SEE YOU NEXT WEEK</span>
@@ -327,52 +1004,79 @@ body{
         <span>SEE YOU NEXT WEEK</span>
         <span>THANK YOU FOR JOINING US</span>
         <span>WELCOME ANYTIME</span>
+
     </div>
 </div>
 
-<!-- Center Thank You -->
+
+<!-- CENTRE THANK YOU -->
 <div class="center-wrap">
-    <div class="bg-outline">THANK YOU</div>
-    <div class="main-text">THANK YOU</div>
+
+    <div class="main-text">
+        THANK YOU
+    </div>
+
 </div>
 
-<!-- Floating Shapes -->
+
+<!-- FLOATING FLOWERS -->
+<div class="floating-flower ff1">🌸</div>
+<div class="floating-flower ff2">🌺</div>
+<div class="floating-flower ff3">🌷</div>
+<div class="floating-flower ff4">🌹</div>
+
+
+<!-- FLOATING COLOUR SHAPES -->
 <div class="shape s1"></div>
 <div class="shape s2"></div>
 <div class="shape s3"></div>
 <div class="shape s4"></div>
 
-<!-- Moving Text Bottom -->
+
+<!-- BOTTOM MARQUEE -->
 <div class="marquee bottom">
     <div class="track">
-        <span>The Pentecostal Church Of God</span>
+
+        <span>THE PENTECOSTAL CHURCH OF GOD</span>
         <span>JESUS IS LORD</span>
         <span>WORSHIP • WORD • PRAYER</span>
         <span>SEE YOU NEXT WEEK</span>
         <span>THANK YOU</span>
 
-        <span>The Pentecostal Church Of God</span>
+        <span>THE PENTECOSTAL CHURCH OF GOD</span>
         <span>JESUS IS LORD</span>
         <span>WORSHIP • WORD • PRAYER</span>
         <span>SEE YOU NEXT WEEK</span>
         <span>THANK YOU</span>
+
     </div>
 </div>
 
-<!-- Footer -->
+
+<!-- FOOTER -->
 <div class="footer">
-    We exist to be heavenly bound,edify the church and evangelize the world.
+    We exist to be heavenly bound, edify the church and evangelize the world.
 </div>
 
+
 <script>
-// Soft blur breathing on floating shapes
+
+/* Soft animated blur on floating shapes */
 const shapes = document.querySelectorAll('.shape');
-setInterval(()=>{
-    shapes.forEach(shape=>{
-        shape.style.filter = `blur(${4 + Math.random()*6}px)`;
+
+setInterval(() => {
+
+    shapes.forEach(shape => {
+
+        shape.style.filter =
+            `blur(${4 + Math.random() * 6}px)`;
+
     });
+
 }, 2500);
+
 </script>
+
 
 </body>
 </html>
